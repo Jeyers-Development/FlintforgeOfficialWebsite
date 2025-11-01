@@ -79,6 +79,21 @@
 
   <div id="status"></div>
 
+  <p>
+    If it says 'Network error'<br>
+    Firefox: <br>
+      -   1. Open a new tab and go to 'about:config' <br>
+      -   2. Set 'security.mixed_content.block_active_content' to false <br>
+    Chrome: <br>
+      -   Clicking the padlock or warning icon next to the address bar, selecting Site settings, and changing the "Insecure content" setting to Allow. <br>
+    Edge: <br>
+      -   Go to Settings > Cookies and site permissions > Insecure content, and click Add next to "Allow" to add the specific site's URL. <br>
+    <br>
+    Why does this happen?<br>
+    -  The proxy that allows you to connect to the server to change your password or delete your account requires http which gives your browser a block for it because
+    of "Mixed Content".
+  </p>
+
   <script>
     const newPassInput = document.getElementById('new');
     const deleteWarning = document.getElementById('deleteWarning');
@@ -131,7 +146,7 @@
       status.style.color = 'blue';
 
       try {
-        const response = await fetch('http://74.208.127.147:8084/change-password', {
+        const response = await fetch('https://74.208.127.147:8084/change-password', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, oldPass, newPass })
